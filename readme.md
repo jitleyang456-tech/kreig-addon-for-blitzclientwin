@@ -1,7 +1,7 @@
 # Kreig Addon — Module Reference
 
 This addon extends the Blitz example addon with five modules covering respawn-anchor combat,
-reactive self-defense, ender pearl throw assistance, and totem-pop notifications. 
+reactive self-defense, ender pearl throw assistance, and totem-pop notifications. Make sure to download from the official blitz client website (https://blitzclient.win/) for safety and compatability.
 
 ## Modules
 

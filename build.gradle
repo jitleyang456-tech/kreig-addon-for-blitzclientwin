@@ -1,0 +1,53 @@
+plugins {
+    id 'fabric-loom' version '1.13.6'
+    id 'java'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    maven { url = "https://maven.fabricmc.net/" }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    // The Blitz addon API. Drop blitz-api-<version>.jar in libs/ -- see the README.
+    //
+    // compileOnly, and plain compileOnly at that:
+    //
+    //   compileOnly   The player already has Blitz. Bundling any of this into your addon would put
+    //                 a second, older copy of Module and Setting on the classpath, and the module
+    //                 manager would reject your modules as the wrong type.
+    //   NOT mod...    The API jar ships with NAMED (Yarn) mappings, so it is already in your
+    //                 mappings and there is nothing for Loom to remap. If you compile against the
+    //                 installed client jar instead, that one IS intermediary-mapped and you need
+    //                 modCompileOnly for it -- see the README.
+    compileOnly files('libs/blitz-api-0.1.0.jar')
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+
+processResources {
+    inputs.property "version", project.version
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}

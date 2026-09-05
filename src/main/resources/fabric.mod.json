@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "blitz-example-addon",
+  "version": "${version}",
+  "name": "Blitz Example Addon",
+  "description": "Private pvp performance mod",
+  "authors": ["you"],
+  "license": "MIT",
+  "environment": "client",
+
+  "entrypoints": {
+    "blitz": [
+      "com.example.exampleaddon.ExampleAddon"
+    ]
+  },
+
+  "mixins": [
+    "blitz-example-addon.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.19.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "blitz": "*"
+  }
+}
